@@ -1,0 +1,11 @@
+@h1{ Scala }
+
+@h2{ @a("Scalable programming language", href := "http://www.scala-lang.org/what-is-scala.html") }
+@h2{ Scales in scope }
+@h3{ Scripting, Web pages, Desktop, Servers, Distributed }
+@h2{ Scales for differences in knowledge and experience }
+@h3{ Enables different coding styles }
+@h3{ Strong support for Procedural, OO, and Functional styles }
+@h2{ Has a goal of scaling through time }
+
+@h3{ @a("Prev", href := "Start.html") @a("Next", href := "ScalaWhatCodeStyle.html") }

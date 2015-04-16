@@ -1,0 +1,13 @@
+@h1{Scala}
+
+@h2{A Scalable Language}
+
+@h1{Slick}
+@h2{A minimalist Database layer}
+
+@h1{Spray}
+@h2{A micro web-service framework}
+
+@h2{Examples are from the Shrine Data Steward project}
+
+@h3{@a("Next", href := "ScalaWhat")}
