@@ -1,10 +1,9 @@
-@import Main._
-
 @object hl extends scalatex.site.Highlighter
 
 @h1{ Functional Programming with Option[T] }
 
-@h3{ Type-safe way to handle missing fields without null checks }
+@h2{ Type-safe way to handle empty fields without null checks }
+@h3{ Replace null checks }
 
 @h2{ An abstract class with two subclasses }
 @h3{ Some - When a value is present }
@@ -12,11 +11,10 @@
 
 @h3{ Takes a type parameter T }
 
-hl.highlight {"""
-val someString:Option[String] = Some("some string")
-val noString:Option[String] = None
-""",
-"scala"
-}
+@hl.highlight("""
+    val someString:Option[String] = Some("some string")
+    val noString:Option[String] = None
+    """,
+    "scala")
 
 @h3{ @a("Prev", href := "ScalaWhatCodeStyle.html") @a("Next", href := "ScalaWhatCodeStyleFold.html") }
