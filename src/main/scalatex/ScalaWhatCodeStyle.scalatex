@@ -8,5 +8,6 @@
 @h2{ Solid platform for Domain-Specific Languages }
 @h3{ Spray.io Routes }
 @h2{ Comes with strong support for Procedural, OO, and Functional styles }
+@h3{ Extremely Explicit, Clear Code}
 
 @h3{ @a("Prev", href := "ScalaWhat.html") @a("Next", href := "Scal-WhatOption.html") }
