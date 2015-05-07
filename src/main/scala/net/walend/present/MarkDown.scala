@@ -10,6 +10,10 @@ import net.walend.present.Style.{ScalaCode, HeadLine, SupportLine, SubTitle, Tit
  */
 object MarkDown {
 
+  def render(presentation:Presentation):Seq[String] = {
+    presentation.slides.map(render)
+  }
+
   def render(slide:Slide):String = {
     slide.items.map(render).mkString("")
   }
@@ -19,6 +23,7 @@ object MarkDown {
       case text: TextLine => render(text)
       case linkedText: LinkTextLine => render(linkedText)
       case blankLine: Line if blankLine == BlankLine => render(blankLine)
+      case codeBlock:CodeBlock => render(codeBlock)
     }
   }
 
@@ -34,6 +39,12 @@ object MarkDown {
     val prefix = linePrefix(text.style)
     val postfix = linePostfix.getOrElse(text.style,"\n")
     s"$prefix[${text.text}](${text.url.toString})$postfix"
+  }
+
+  def render(codeBlock: CodeBlock):String = {
+    val prefix = linePrefix(ScalaCode)
+    val postfix = linePostfix(ScalaCode)
+    s"$prefix${codeBlock.code}$postfix"
   }
 
   val linePrefix = Map(

@@ -12,6 +12,9 @@ trait Presentation {
   def slides:Seq[Slide]
 }
 
+case class SimplePresentation(slides:Seq[Slide]) extends Presentation {
+
+}
 
 trait Slide {
   def items:Seq[Item]
@@ -33,6 +36,10 @@ object LinkTextLine extends ((String,URL,Style) => LinkTextLine) {
   def apply(text:String,urlText:String,style:Style):LinkTextLine = LinkTextLine(text,new URL(urlText),style)
   def apply(text:String,urlText:String):LinkTextLine = LinkTextLine(text,new URL(urlText))
 }
+
+trait Block extends Item
+
+case class CodeBlock(code:String) extends Block
 
 sealed case class Style(name:String)
 
