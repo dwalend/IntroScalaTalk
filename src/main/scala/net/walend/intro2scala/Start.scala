@@ -10,7 +10,7 @@ import net.walend.present._
 
 object Start {
 
-  val Cover = SimpleSlide (Seq(
+  val Cover = SimpleSlide ("Cover",Seq(
     TextLine("An Introduction To Scala With Examples Using Slick and Spray", Style.Title),
     BlankLine,
     TextLine("David Walend", Style.SubTitle),
@@ -18,7 +18,7 @@ object Start {
     LinkTextLine("Slides Online", "https://github.com/dwalend/IntroScalaTalk", Style.SubTitle)
   ))
 
-  val Outline = SimpleSlide(Seq(
+  val Outline = SimpleSlide("Outline",Seq(
     TextLine("Scala", Style.HeadLine),
     TextLine("A Scalable Language", Style.SupportLine),
     BlankLine,
@@ -33,7 +33,7 @@ object Start {
 
   //todo shrine catalyst slide
 
-  val ScalaWhat = SimpleSlide(Seq(
+  val ScalaWhat = SimpleSlide("ScalaWhat",Seq(
     TextLine("Scala",Style.Title),
     LinkTextLine("A Scalable Programming Language","http://www.scala-lang.org/what-is-scala.html",Style.HeadLine),
     TextLine("Scales in Scope",Style.HeadLine),
@@ -45,7 +45,7 @@ object Start {
     TextLine("Has a Goal of Scaling Through Time",Style.HeadLine)
   ))
 
-  val CodeStyle = SimpleSlide(Seq(
+  val CodeStyle = SimpleSlide("CodStyle",Seq(
     TextLine("Scala Enables Different Coding Styles",Style.Title),
     TextLine("Custom Control Flow"),
     TextLine("First-class Functions and Higher-Order Functions",Style.SupportLine),
@@ -56,7 +56,7 @@ object Start {
     TextLine("Extremely Clear Code")
   ))
 
-  val FuncOption = SimpleSlide(Seq(
+  val FuncOption = SimpleSlide("FuncOption",Seq(
     TextLine("Functional Programming with Option[T]",Style.Title),
     TextLine("Handle Empty Fields With Container",Style.HeadLine),
     TextLine("Replace null checks",Style.SupportLine),
@@ -73,7 +73,7 @@ val noString:Option[String] = None
               """)
   ))
 
-  val FuncFold = SimpleSlide(Seq(
+  val FuncFold = SimpleSlide("FuncFold",Seq(
   //todo is fold an FP thing?
     TextLine("FP with Option.fold()()",Style.HeadLine),
     BlankLine,
