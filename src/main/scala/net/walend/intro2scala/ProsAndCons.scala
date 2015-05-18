@@ -197,7 +197,7 @@ object ProsAndCons {
     TextLine("Academic Instead of Pragmatic Biases",Style.SupportLine),
     TextLine("Local (Boston) Uptake in Islands",Style.HeadLine),
     TextLine("Kendall Square, South End, Harbor District, Longwood, Waltham",Style.TertiaryLine),
-    TextLine("Rapidly Evolving Toolset and Core Libraries",Style.HeadLine),
+    TextLine("Rapidly Evolving Toolset and Libraries",Style.HeadLine),
     TextLine("Mild Disregard for Backwards Compatibility",Style.SupportLine)
   ))
 
