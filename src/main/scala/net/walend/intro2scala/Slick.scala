@@ -1,10 +1,8 @@
 package net.walend.intro2scala
 
-import net.walend.present.{CodeSyntax, CodeBlock, TextLine, LinkTextLine, LinkFragment, TextFragment, FragLine, Style, SimpleSlide}
+import net.walend.present.{CodeSyntax, CodeBlock, TextLine, LinkTextLine, Style, SimpleSlide}
 
 /**
- *
- *
  * @author dwalend
  * @since v0.1.2
  */
@@ -17,7 +15,7 @@ object Slick {
     TextLine("Case Classes and Tuples",Style.SupportLine),
     TextLine("Lifted API For Functional-Style Queries",Style.HeadLine),
     LinkTextLine("Compact, Clean Code","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
-    LinkTextLine("Composable Queries","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
+    LinkTextLine("Composible Queries","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
     TextLine("Plain SQL API Gives Full Control Over SQL",Style.HeadLine),
     TextLine("Isolates SQL's Complexity",Style.SupportLine)
   ))
@@ -58,8 +56,8 @@ object Slick {
                 |      TopicRecord(id, name, description, createdBy, createDate, TopicState.namesToStates(stateName), changedBy, changeDate)
                 |    }
                 |
-                |    def toRow(topicRecord: TopicRecord):Option[(Option[TopicId],String,String,UserName,Date,String,UserName,Date)] =
-                |      Some((topicRecord.id,
+                |    def toRow(topicRecord: TopicRecord) = Some((
+                |        topicRecord.id,
                 |        topicRecord.name,
                 |        topicRecord.description,
                 |        topicRecord.createdBy,
@@ -73,7 +71,6 @@ object Slick {
                 |  val allTopicQuery = TableQuery[TopicTable]
                 |""".stripMargin)
 
-  //todo must toRow() have a type signature?
   ))
 
   val SlickLiftedQuery = SimpleSlide("SlickLiftedQuery",Seq(
@@ -129,7 +126,7 @@ object Slick {
 
   ))
 
-  val SlickComposableQuery = SimpleSlide("SlickComposableQuery",Seq(
+  val SlickComposibleQuery = SimpleSlide("SlickComposibleQuery",Seq(
     TextLine("New Requirement - Change History for Topics",Style.Title),
     TextLine("Composible Queries Work",Style.HeadLine),
     CodeBlock("""  val mostRecentTopicQuery: Query[TopicTable, TopicRecord, Seq] = for(
@@ -184,5 +181,5 @@ object Slick {
     TextLine("Attempted Backwards Compatibility",Style.SupportLine)
   ))
 
-  val slides = Seq(SlickIntro,SlickLiftedTable,SlickLiftedQuery,SlickComposableQuery,SlickPlainSql,Slick3)
+  val slides = Seq(SlickIntro,SlickLiftedTable,SlickLiftedQuery,SlickComposibleQuery,SlickPlainSql,Slick3)
 }

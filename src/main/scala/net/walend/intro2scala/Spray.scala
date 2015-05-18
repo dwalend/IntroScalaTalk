@@ -118,7 +118,43 @@ object Spray {
 
   ))
 
-  //todo can you do it without the Directive?
+  val SprayNoDirective = SimpleSlide("SprayNoDirective",Seq(
+    TextLine("Better With a Higher Order Function"),
+    CodeBlock("""  def matchQueryParameters(userName: Option[UserName])(parameterRoute:QueryParameters => Route): Route =  {
+                |
+                |    parameters('state.?,'skip.as[Int].?,'limit.as[Int].?,'sortBy.as[String].?,'sortDirection.as[String].?,'minDate.as[Date].?,'maxDate.as[Date].?) { (stateStringOption,skipOption,limitOption,sortByOption,sortOption,minDate,maxDate) =>
+                |
+                |      val stateTry = TopicState.stateForStringOption(stateStringOption)
+                |      stateTry match {
+                |        case Success(stateOption) =>
+                |          val qp = QueryParameters(userName,
+                |            stateOption,
+                |            skipOption,
+                |            limitOption,
+                |            sortByOption,
+                |            SortOrder.sortOrderForStringOption(sortOption),
+                |            minDate,
+                |            maxDate
+                |          )
+                |
+                |          parameterRoute(qp)
+                |
+                |        case Failure(ex) => badStateRoute(stateStringOption)
+                |      }
+                |    }
+                |  }
+                |""".stripMargin),
+    CodeBlock("""  def getUserTopics(userId:UserName):Route = get {
+                |    //lookup topics for this user in the db
+                |   matchQueryParameters(Some(userId)){queryParameters:QueryParameters =>
+                |      val researchersTopics = blocking {
+                |        StewardDatabase.db.selectTopicsForResearcher(queryParameters)
+                |      }
+                |      complete(researchersTopics)
+                |    }
+                |  }
+                |""")
+  ))
 
-  val slides = Seq(SprayIntro,SprayRoute,SprayRouteDsl,SprayDirective)
+  val slides = Seq(SprayIntro,SprayRoute,SprayRouteDsl,SprayDirective,SprayNoDirective)
 }
