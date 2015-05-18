@@ -122,8 +122,6 @@ object Slick {
                 |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
                 |x2 where x2."state" = 'Pending'
                 |""".stripMargin,CodeSyntax.Sql)
-    //todo get an order by
-
   ))
 
   val SlickComposibleQuery = SimpleSlide("SlickComposibleQuery",Seq(
@@ -167,8 +165,6 @@ object Slick {
                 |      //remove any null values from the map -- a bit of a hack
                 |      val researcherMapsWithoutNulls = researcherMaps.map(researcher => researcher.filter(x => x._2 != null))
                 |""".stripMargin)
-    //todo get an order by
-
   ))
 
   val Slick3 = SimpleSlide("Slick3",Seq(

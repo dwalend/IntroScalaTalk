@@ -35,10 +35,10 @@ object Spray {
     TextLine("... Try the Route DSL and See What Happens",Style.TertiaryLine)
   ))
 
-  //todo include an example URL
   val SprayRouteDsl = SimpleSlide("SprayRouteDsl",Seq(
     TextLine("Spray Routing Provides a DSL",Style.HeadLine),
     TextLine("(Conceptually) Converts an HttpRequest Into an HttpResponse",Style.SupportLine),
+    CodeBlock("https://datasteward.example.edu/researcher/topics?skip=10&limit=5&sortBy=name&sortDirection=ascending"),
     CodeBlock("""  lazy val route:Route =
                 |    staticResources ~
                 |      logRequestResponse("route",Logging.DebugLevel) { authenticatedUser }

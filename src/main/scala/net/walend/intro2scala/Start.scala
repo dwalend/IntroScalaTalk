@@ -1,7 +1,7 @@
 package net.walend.intro2scala
 
-import net.walend.present
-import net.walend.present._
+import net.walend.present.{CodeBlock, LinkTextLine, BlankLine, Style, TextLine, SimpleSlide}
+
 
 /**
  * @author david 
@@ -53,19 +53,23 @@ object Start {
   val CodeStyle = SimpleSlide("CodStyle",Seq(
     TextLine("Scala Enables Different Coding Styles",Style.Title),
     TextLine("Custom Control Flow"),
-
-  //todo show a custom control flow
-
     TextLine("First-class Functions and Higher-Order Functions",Style.SupportLine),
+    CodeBlock("""  def configForTest[T](key:String,value:String)(block: => T):T = {
+                |    val originalValue = System.getProperty(key)
+                |    System.setProperty(key,value)
+                |    try{
+                |      block
+                |    }
+                |    finally {
+                |      System.setProperty(key,originalValue)
+                |    }
+                |  }"""),
     TextLine("Strongly Typed - the Most Complete Type System in Use"),
     TextLine("Solid Platform for Domain-Specific Languages"),
-    TextLine("Spray.io Routes",Style.SupportLine),
     TextLine("Style Support is Built From Language Primitives, Not Language Changes",Style.HeadLine),
     TextLine("Extremely Clear Code",Style.HeadLine),
     TextLine("Use the Style That Best Matches the Task at Hand",Style.SupportLine)
   ))
-
-  //todo Functional programming slide
 
   val FuncOption = SimpleSlide("FuncOption",Seq(
     TextLine("Functional Programming with Option[T]",Style.Title),

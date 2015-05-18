@@ -12,12 +12,12 @@ object ProsAndCons {
 
   val Pros = SimpleSlide("Pros",Seq(
     TextLine("Scala - Pros", Style.Title),
-    TextLine("Thinking About a Problem Results in Readable, Consice Code", Style.HeadLine),
+    TextLine("Thinking About a Problem Results in Readable, Concise Code", Style.HeadLine),
     FragLine(Seq(TextFragment("See"),LinkFragment("Dijkstra's Algorithm","http://en.wikipedia.org/wiki/Dijkstra's_algorithm#Pseudocode"),TextFragment("With"),LinkFragment("Semirings: Java vs Scala","http://dwalend.github.io/blog/2014/10/05/Semirings/"))),
     TextLine("FP Helps Make Code Comprehendable", Style.HeadLine),
     LinkTextLine("Let Your Pattern Book Collect Dust","http://alvinalexander.com/scala/how-scala-killed-oop-strategy-design-pattern#What_about_those_other_OOP_design_patterns", Style.SupportLine),
-    TextLine("Runs on the Java VM",Style.HeadLine),
-    TextLine("Gentle Learning Curve From Java",Style.SupportLine),
+    TextLine("Gentle Learning Curve From Java",Style.HeadLine),
+    TextLine("Runs on the Java VM",Style.SupportLine),
     TextLine("Use Scala as a Better Java on the First Day",Style.SupportLine),
     TextLine("Knowledge of Java Libraries Carries Forward",Style.SupportLine),
     TextLine("Out \"Javas\" Java in all but Community and Uptake"),
