@@ -20,9 +20,8 @@ object Start {
   ))
 
   val Abstract = SimpleSlide("Abstract",Seq(TextLine(
-    """
-      |The Boston Area Scala Enthusiasts MeetUp has had several requests for an introductory level talk on Scala. I recently put such a talk together for my coworkers at HMS that I'd like to share. I'll describe a bit about how Scala's founders intended it to be a scalable programming language, and cite examples that show some success. I will also share some anecdotes from my own career regarding pros and cons of Scala at work and in hobby code. Along the way I'll introduce case classes, Options, a little functional programming, Slick -- a database library, and Spray -- a web service library, all through example code pulled out of source control at my day job.
-    """.stripMargin,Style.SupportLine)))
+    """The Boston Area Scala Enthusiasts MeetUp has had several requests for an introductory level talk on Scala. I recently put such a talk together for my coworkers at HMS that I'd like to share. I'll describe a bit about how Scala's founders intended it to be a scalable programming language, and cite examples that show some success. I will also share some anecdotes from my own career regarding pros and cons of Scala at work and in hobby code. Along the way I'll introduce case classes, Options, a little functional programming, Slick -- a database library, and Spray -- a web service library, all through example code pulled out of source control at my day job."""
+    .stripMargin,Style.SupportLine)))
 
   val Outline = SimpleSlide("Outline",Seq(
     TextLine("Scala", Style.HeadLine),
@@ -101,7 +100,7 @@ val noString:Option[String] = None
     LinkTextLine("Read more about fold()()","https://coderwall.com/p/4l73-a/scala-fold-foldleft-and-foldright",Style.SupportLine)
   ))
 
-  val slides = Seq(Cover,Outline,ScalaWhat,CodeStyle,FuncOption,FuncFold)
+  val slides = Seq(Cover,Abstract,Outline,ScalaWhat,CodeStyle,FuncOption,FuncFold)
 }
 
 //todo a slide about shrine and gage the room
