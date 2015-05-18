@@ -1,6 +1,6 @@
 package net.walend.present
 
-import net.walend.present.Style.{ScalaCode, HeadLine, SupportLine, SubTitle, Title,Plain}
+import net.walend.present.Style.{ScalaCode, HeadLine, SupportLine, SubTitle, Title,Plain,TertiaryLine,Quote}
 
 /**
  * Render a slide stack in MarkDown
@@ -74,13 +74,15 @@ object MarkDown {
   }
 
   def render(codeBlock: CodeBlock):String = {
-    val prefix = linePrefix(ScalaCode)
-    val postfix = linePostfix(ScalaCode)
+    val prefix = s"```${codeBlock.syntax.name}\n"
+    val postfix = "\n```\n"
     s"$prefix${codeBlock.code}$postfix"
   }
 
   def render(fragLine: FragLine):String = {
-    fragLine.frags.map(render).mkString(" ") + "\n"
+    val prefix = linePrefix(fragLine.style)
+    val postfix = linePostfix.getOrElse(fragLine.style,"\n")
+    prefix + fragLine.frags.map(render).mkString(" ") + postfix
   }
 
   def render(frag:Fragment):String = {
@@ -107,7 +109,9 @@ object MarkDown {
     SubTitle -> "###",
     HeadLine -> "##",
     SupportLine -> "###",
+    TertiaryLine -> "###",
     ScalaCode -> "```Scala\n",
+    Quote -> "> ",
     Plain -> ""
   )
 

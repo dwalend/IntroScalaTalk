@@ -1,6 +1,6 @@
 package net.walend.intro2scala
 
-import net.walend.present.{CodeBlock, TextLine, LinkTextLine, LinkFragment, TextFragment, FragLine, Style, SimpleSlide}
+import net.walend.present.{CodeSyntax, CodeBlock, TextLine, LinkTextLine, LinkFragment, TextFragment, FragLine, Style, SimpleSlide}
 
 /**
  *
@@ -11,7 +11,7 @@ import net.walend.present.{CodeBlock, TextLine, LinkTextLine, LinkFragment, Text
 object Slick {
 
   val SlickIntro = SimpleSlide("Slick",Seq(
-    LinkTextLine("Slick","http://slick.typesafe.com/doc/2.1.0/introduction.html", Style.Title),  //todo 3.0 link
+    LinkTextLine("Slick","http://slick.typesafe.com/doc/3.0.0/introduction.html", Style.Title),
     TextLine("A Database Library For Scala", Style.HeadLine),
     TextLine("Uses Scala's Common Currencies In Its API",Style.SupportLine),
     TextLine("Case Classes and Tuples",Style.SupportLine),
@@ -72,6 +72,8 @@ object Slick {
                 |
                 |  val allTopicQuery = TableQuery[TopicTable]
                 |""".stripMargin)
+
+  //todo must toRow() have a type signature?
   ))
 
   val SlickLiftedQuery = SimpleSlide("SlickLiftedQuery",Seq(
@@ -89,7 +91,7 @@ object Slick {
                 |  private def topicSelectQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val countFilter = topicCountQuery(queryParameters)
                 |
-                |    //todo is there some way to do something with a map from column names to columns that I don't have to update? I couldn't find one.
+                |    //todo is there some way to get a map from column names to columns that I don't have to update?
                 |    val orderByQuery = queryParameters.sortByOption.fold(countFilter)(
                 |      columnName => countFilter.sortBy(x => queryParameters.sortOrder.orderForColumn(columnName match {
                 |        case "id" => x.id
@@ -109,64 +111,78 @@ object Slick {
                 |  }
                 |
                 |  def selectTopicsForSteward(queryParameters: QueryParameters):StewardsTopics = {
-                |    database.withSession { implicit session: Session =>
-                |      createStewardsTopics(topicCountQuery(queryParameters).length.run,
-                |                            queryParameters.skipOption.getOrElse(0), //List starts at this record number
-                |                            topicSelectQuery(queryParameters).list)
+                |    blocking {
+                |      database.withSession { implicit session: Session =>
+                |        createStewardsTopics(topicCountQuery(queryParameters).length.run,
+                |                              queryParameters.skipOption.getOrElse(0), //List starts at this record number
+                |                              topicSelectQuery(queryParameters).list)
+                |      }
                 |    }
                 |  }
-                |""")
+                |""".stripMargin),
+    TextLine("Produces SQL that looks like this: "),
+    CodeBlock("""select x2."id", x2."name", x2."description", x2."createdBy",
+                |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
+                |x2 where x2."state" = 'Pending'
+                |""".stripMargin,CodeSyntax.Sql)
+    //todo get an order by
 
   ))
-    //todo show what SQL this produces
 
-  // todo SQL statements for this query, too
-  val SlickComposableQuery = SimpleSlide("SlickLiftedQuery",Seq(
-    TextLine("New Requirement -- Keep Change History for Topics",Style.Title),
-    TextLine("Composible Queries Payed Off",Style.HeadLine),
+  val SlickComposableQuery = SimpleSlide("SlickComposableQuery",Seq(
+    TextLine("New Requirement - Change History for Topics",Style.Title),
+    TextLine("Composible Queries Work",Style.HeadLine),
     CodeBlock("""  val mostRecentTopicQuery: Query[TopicTable, TopicRecord, Seq] = for(
                 |    topic <- allTopicQuery if !allTopicQuery.filter(_.id === topic.id).filter(_.changeDate > topic.changeDate).exists
                 |  ) yield topic
                 |
                 |  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = mostRecentTopicQuery
-                |...""".stripMargin)
+                |...""".stripMargin),
+    TextLine("Produces SQL that looks like this: "),
+    CodeBlock("""select x2."id", x2."name", x2."description", x2."createdBy",
+                |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
+                |x2 where (not exists(select x3."createDate", x3."description", x3."state",
+                |x3."changeDate", x3."changedBy", x3."id", x3."createdBy", x3."name" from
+                |"topics" x3 where (x3."id" = x2."id")
+                |and (x3."changeDate" > x2."changeDate"))) and (x2."state" = 'Pending')
+                |""".stripMargin,CodeSyntax.Sql)
   ))
 
   val SlickPlainSql = SimpleSlide("SlickPlainSql",Seq(
     TextLine("Slick Plain SQL",Style.Title),
-    CodeBlock("""      val tables = MTable.getTables(None, None, None, None)
-                |      val table = tables.list.filter(_.name.name == nodeTableName)
-                |      val columns: List[MColumn] = table.head.getColumns.list
-                |
-                |      val columnTypeMap: Map[String, String] = columns.map(column => (column.name, column.sqlTypeName.get)).toMap
-                |      val columnMapAndProblems: ColumnMap = ColumnMap(columnTypeMap, Seq.empty, 0, nodeTableName)
-                |
-                |      val columnsToSelect = columns.filterNot(_.name.equalsIgnoreCase(idColumnName))
-                |        .filterNot(_.name.equalsIgnoreCase(regionColumnName))
-                |        .filterNot(_.name.equalsIgnoreCase(originColumnName))
-                |        .filterNot(_.name.equalsIgnoreCase(lineColumnName))
+    CodeBlock("""
                 |
                 |      val columnNamesToSelect = columnsToSelect.map(_.name)
                 |
-                |      //Get distinct researcher ids                                                                                               |      val distinctResearchersIdQuery = sql"select distinct(#$aniIdColumnName) from #$nodeTableName where #$roleColumnName = ${NodeType.RESEARCHER.abbreviation} or #$roleColumnName = ${NodeType.PHYSRES.abbreviation}".as[String]
+                |      //Get distinct researcher ids
+                |      val distinctResearchersIdQuery = sql"select distinct(#$aniIdColumnName) from #$nodeTableName where #$roleColumnName = ${NodeType.RESEARCHER.abbreviation} or #$roleColumnName = ${NodeType.PHYSRES.abbreviation}".as[String]
                 |      val researcherIds = distinctResearchersIdQuery.iterator
                 |
-                |      //Get all of the data for all of the distinct researchers, except the id (which won't be distinct)                          |      val researchersQuery: StaticQuery[String, List[String]] = StaticQuery.query(s"select ${columnNamesToSelect.mkString(",")} from $nodeTableName where $aniIdColumnName = ?")
+                |      //Get all of the data for all of the distinct researchers, except the id (not distinct)
+                |      val researchersQuery: StaticQuery[String, List[String]] = StaticQuery.query(s"select ${columnNamesToSelect.mkString(",")} from $nodeTableName where $aniIdColumnName = ?")
                 |
                 |      //Query for a list for each id
                 |      val researchers = researcherIds.map(id => researchersQuery(id).first)
                 |      //For each id, make a Map from column names to values
                 |      val researcherMaps = researchers.map(researcher => columnNamesToSelect.zip(researcher).toMap)
                 |
-                |      //remove any null values from the map -- a bit of a hack                                                                    |      val researcherMapsWithoutNulls = researcherMaps.map(researcher => researcher.filter(x => x._2 != null))
-                |""")
+                |      //remove any null values from the map -- a bit of a hack
+                |      val researcherMapsWithoutNulls = researcherMaps.map(researcher => researcher.filter(x => x._2 != null))
+                |""".stripMargin)
+    //todo get an order by
+
   ))
 
+  val Slick3 = SimpleSlide("Slick3",Seq(
+    TextLine("Slick 3.0",Style.Title),
+    TextLine("Database I/O Actions Supports Paging",Style.HeadLine),
+    TextLine("Publish to Akka Streams to get Reactive Backpressure",Style.SupportLine),
+    LinkTextLine("Hikari Connection Pool","http://brettwooldridge.github.io/HikariCP/",Style.HeadLine),
+    TextLine("Macro-Based Implementation of the Plain SQL API",Style.HeadLine),
+    TextLine("Compile-Time Checking and Type Inference For SQL Statements",Style.SupportLine),
+    TextLine("Attempted Backwards Compatibility",Style.SupportLine)
+  ))
 
-
-
-  //todo Slick 3.0
-
-  val slides = Seq(SlickIntro,SlickLiftedTable,SlickLiftedQuery,SlickComposableQuery,SlickPlainSql)
+  val slides = Seq(SlickIntro,SlickLiftedTable,SlickLiftedQuery,SlickComposableQuery,SlickPlainSql,Slick3)
 }

@@ -3,7 +3,7 @@
 ## Small Tight-knit Community
 ### With academic instead of pragmatic biases
 ## Local Uptake in Islands
-### Kendall Square, South End, Harbor District, Waltham's reservoirs, Longwood
+### Kendall Square, South End, Harbor District, Longwood
 ## Rapidly Evolving Toolset and Core Libraries
 ### Mild disregard for backwards compatibility
 

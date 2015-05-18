@@ -41,7 +41,7 @@ object LinkTextLine extends ((String,URL,Style) => LinkTextLine) {
 
 trait Block extends Item
 
-case class CodeBlock(code:String) extends Block
+case class CodeBlock(code:String,syntax:CodeSyntax = CodeSyntax.Scala) extends Block
 
 trait Fragment
 
@@ -56,7 +56,7 @@ object LinkFragment extends ((TextFragment,String) => LinkFragment) {
   def apply(text:String,urlText:String):LinkFragment = LinkFragment(TextFragment(text),urlText)
 }
 
-case class FragLine(frags:Seq[Fragment]) extends Line
+case class FragLine(frags:Seq[Fragment],style: Style = Style.SupportLine) extends Line
 
 sealed case class Style(name:String)
 
@@ -65,9 +65,21 @@ object Style {
   val SubTitle = Style("SubTitle")
   val HeadLine = Style("HeadLine")
   val SupportLine = Style("SupportLine")
+  val TertiaryLine = Style("TertiaryLine")
   val ScalaCode = Style("ScalaCode")
-
+  val Quote = Style("Quote")
   val Plain = Style("Plain")
 
-  val allStyles = Set(Title,SubTitle,HeadLine,SupportLine,ScalaCode,Plain)
+  val allStyles = Set(Title,SubTitle,HeadLine,SupportLine,TertiaryLine,ScalaCode,Plain)
+}
+
+sealed case class CodeSyntax(name:String)
+
+object CodeSyntax {
+  val Scala = CodeSyntax("Scala")
+  val Java = CodeSyntax("Java")
+  val Bash = CodeSyntax("Bash")
+  val Sql = CodeSyntax("Sql")
+
+  val allCodeSyntax = Set(Scala,Java,Bash)
 }

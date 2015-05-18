@@ -1,6 +1,10 @@
 package net.walend.intro2scala
 
-import net.walend.present.{SimplePresentation, MarkDown}
+import java.io.File
+
+import net.walend.present.{SimpleSlide, SimplePresentation, MarkDown}
+import java.nio.file.{Path, Paths, Files}
+import java.nio.charset.StandardCharsets
 
 /**
  *
@@ -11,9 +15,17 @@ import net.walend.present.{SimplePresentation, MarkDown}
 object IntroToScala {
 
   def main (args: Array[String]) {
-    val allSlides = Start.slides ++ ProsAndCons.slides ++ Slick.slides
+    val allSlides: Seq[SimpleSlide] = Start.slides ++ ProsAndCons.slides ++ Slick.slides ++ Spray.slides ++ WrapUp.slides
     val presentation = SimplePresentation(allSlides)
 
-    MarkDown.render(presentation)
+    new File("deck").mkdir()
+
+    val markdown: Seq[String] = MarkDown.render(presentation)
+    val paths = presentation.slides.map(x => Paths.get(s"deck/${x.name}.md"))
+    paths.zip(markdown).foreach(x => writeTextToFile(x._2,x._1))
+  }
+
+  def writeTextToFile(text:String,path:Path):Unit = {
+    Files.write(path, text.getBytes(StandardCharsets.UTF_8))
   }
 }
