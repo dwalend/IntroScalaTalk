@@ -30,7 +30,6 @@ object MarkDown {
 
     def footer(previous:Option[Slide],next:Option[Slide]):String = {
 
-      //todo multiple link lines
       val emtpyFrag:Fragment = EmptyFragment
       val prevFrag = previous.fold(emtpyFrag)(previous => LinkFragment("Prev",fileName(previous)))
       val nextFrag = next.fold(emtpyFrag)(next => LinkFragment("Next",fileName(next)))
