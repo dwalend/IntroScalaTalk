@@ -18,10 +18,11 @@ object IntroToScala {
     val allSlides: Seq[SimpleSlide] = Start.slides ++ ProsAndCons.slides ++ Slick.slides ++ Spray.slides ++ WrapUp.slides
     val presentation = SimplePresentation(allSlides)
 
-    new File("deck").mkdir()
+    val siteOut = new File("deck")
+    siteOut.mkdir()
 
     val markdown: Seq[String] = MarkDown.render(presentation)
-    val paths = presentation.slides.map(x => Paths.get(s"deck/${x.name}.md"))
+    val paths = presentation.slides.map(x => Paths.get(s"${siteOut.toString}/${x.name}.md"))
     paths.zip(markdown).foreach(x => writeTextToFile(x._2,x._1))
   }
 
