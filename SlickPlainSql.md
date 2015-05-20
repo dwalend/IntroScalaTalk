@@ -1,7 +1,5 @@
 #Slick Plain SQL
 ```Scala
-
-
       val columnNamesToSelect = columnsToSelect.map(_.name)
 
       //Get distinct researcher ids

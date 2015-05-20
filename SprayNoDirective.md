@@ -26,15 +26,13 @@
 
 ```
 ```Scala
-  def getUserTopics(userId:UserName):Route = get {
-                |    //lookup topics for this user in the db
-                |   matchQueryParameters(Some(userId)){queryParameters:QueryParameters =>
-                |      val researchersTopics = blocking {
-                |        StewardDatabase.db.selectTopicsForResearcher(queryParameters)
-                |      }
-                |      complete(researchersTopics)
-                |    }
-                |  }
-                |
+  def getUserTopics(researcherId:UserName):Route = get {
+    //lookup topics for this user in the db
+   matchQueryParameters(Some(researcherId)){queryParameters:QueryParameters =>
+      val researchersTopics = StewardDatabase.db.selectTopicsForResearcher(queryParameters)
+      complete(researchersTopics)
+    }
+  }
+
 ```
 ###[Prev](SprayDirective.md) [Next](WrapUp.md)

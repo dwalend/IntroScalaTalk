@@ -1,5 +1,5 @@
 ##A Spray Directive
-###QueryParameters Originally Used the parameters() Directive to Create New QueryParameters
+###Tried the parameters() Directive to Create New QueryParameters
 ```Scala
     def getUserTopics(userId:UserId):Route = get {
       parameters(('userName.?,'state.?,'skip.as[Int].?,'limit.as[Int].?,'sortBy.as[String].?,'sortDirection.as[String].?).as[QueryParameters]) {
@@ -16,7 +16,7 @@
 ###Didn't Want to Cut-Paste That Much Code
 ```Scala
   import shapeless.{:: => shapelessConcat}
-  case class matchQueryParameters(userId:Option[UserId] = None) extends Directive[QueryParameters shapelessConcat HNil] {
+  case class matchQueryParameters(researcherId:Option[UserId] = None) extends Directive[QueryParameters shapelessConcat HNil] {
     import spray.routing.directives.ParameterDirectives._
     import spray.routing.directives.RouteDirectives.complete
     import spray.routing.directives.RespondWithDirectives.respondWithStatus
@@ -28,7 +28,7 @@
         val stateTry = TopicState.stateForStringOption(stateStringOption)
         stateTry match {
           case Success(stateOption) => {
-              val qp = QueryParameters(userId,
+              val qp = QueryParameters(researcherId,
                                         stateOption,
                                         skipOption,
                                         limitOption,

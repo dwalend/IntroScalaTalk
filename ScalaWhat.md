@@ -1,7 +1,7 @@
 #Scala
 ##[A Scalable Programming Language](http://www.scala-lang.org/what-is-scala.html)
 ##Scales in Scope
-###Scripting, Web pages, Desktop, Servers, Distributed
+###Scripting, Web pages, Desktop, Servers, Distributed - Both Homo- and Heterogeneous
 ##Roots in Category Theory Make Code Expressive
 ##Scales for Differences in Knowledge and Experience
 ###Enables Different Coding Styles

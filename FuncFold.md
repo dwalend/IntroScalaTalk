@@ -1,6 +1,6 @@
-##Functional Programming with Option.fold()()
+##Functional Programming with Option's fold()()
 
-##Option's fold()() method takes two functions
+##Option[T]'s fold()() method takes two functions
 ```Scala
 def fold[Out](ifEmpty: => Out)(f: (T) => Out): Out
 ```

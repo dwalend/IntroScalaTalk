@@ -1,6 +1,6 @@
 #Functional Programming with Option[T]
 ##Handle Empty Fields With Container
-###Replace null checks, Cure for Sir Tony Hoare's 
+###Replace Nulls And Checks, Fix Sir Tony Hoare's 
 ###["billion-dollar mistake ... the invention of the null reference in 1965"](http://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions)
 
 ##Option[T] is an abstract class with two subclasses
@@ -13,6 +13,7 @@
 
 val someString:Option[String] = Some("some string")
 val noString:Option[String] = None
+val suspectString:Option[String] = Option(null) // == None
               
 ```
-###[Prev](CodStyle.md) [Next](FuncFold.md)
+###[Prev](CodeStyleFromLanguage.md) [Next](FuncFold.md)

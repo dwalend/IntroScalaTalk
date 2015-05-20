@@ -9,7 +9,7 @@
     val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = mostRecentTopicQuery
 ...
 ```
-##Produces SQL that looks like this: 
+##Now SQL that looks like this: 
 ```Sql
 select x2."id", x2."name", x2."description", x2."createdBy",
 x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"

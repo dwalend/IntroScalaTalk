@@ -2,7 +2,7 @@
 ```Scala
   private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
     val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = allTopicQuery
-    val researcherFilter = queryParameters.researcherIdOption.fold(allTopics)(userId => allTopics.filter(_.createdBy === userId))
+    val researcherFilter = queryParameters.researcherIdOption.fold(allTopics)(researcherId => allTopics.filter(_.createdBy === researcherId))
     val stateFilter = queryParameters.stateOption.fold(researcherFilter)(state => researcherFilter.filter(_.state === state.name))
     val minDateFilter = queryParameters.minDate.fold(stateFilter)(minDate => stateFilter.filter(_.changeDate >= minDate))
     val maxDateFilter = queryParameters.maxDate.fold(minDateFilter)(maxDate => minDateFilter.filter(_.changeDate <= maxDate))
@@ -33,14 +33,20 @@
   }
 
   def selectTopicsForSteward(queryParameters: QueryParameters):StewardsTopics = {
-    blocking {
-      database.withSession { implicit session: Session =>
-        createStewardsTopics(topicCountQuery(queryParameters).length.run,
-                              queryParameters.skipOption.getOrElse(0), //List starts at this record number
-                              topicSelectQuery(queryParameters).list)
-      }
+    withDatabaseSession { implicit session: Session =>
+      createStewardsTopics(topicCountQuery(queryParameters).length.run,
+                            queryParameters.skipOption.getOrElse(0), //List starts at this record number
+                            topicSelectQuery(queryParameters).list)
     }
   }
+
+  def withDatabaseSession[T](f: Session => T): T = {
+    blocking {
+      database.withSession(f)
+    }
+  }
+
+
 
 ```
 ##Produces SQL that looks like this: 

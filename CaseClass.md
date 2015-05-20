@@ -3,7 +3,7 @@
 ###[Fulfills Eight Items From Josh Bloch's _Effective Java_](http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html)
 ###[From One of Shrine's Microservices](https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup)
 ```Scala
-case class QueryParameters(userIdOption:Option[UserId] = None,
+case class QueryParameters(researcherIdOption:Option[UserId] = None,
                             stateOption:Option[TopicState] =  None,
                             skipOption:Option[Int] =  None,
                             limitOption:Option[Int] = None,
@@ -12,7 +12,7 @@ case class QueryParameters(userIdOption:Option[UserId] = None,
                           )
 
 val everything = QueryParameters()
-val justDave = QueryParameters(userIdOption = Some("dave"))
+val justDave = QueryParameters(researcherIdOption = Some("dave"))
 val justDaveByDate = justDave.copy(sortByOption = Some("date"))
 
       
@@ -33,7 +33,7 @@ public class QueryParameters implements Product,Serializable {
 
 //Immutable member variables
 
-  private final Option<String> userIdOption;
+  private final Option<String> researcherIdOption;
   private final Option<TopicState> stateOption;
   private final Option<Object> skipOption;
   private final Option<Object> limitOption;
@@ -42,7 +42,7 @@ public class QueryParameters implements Product,Serializable {
 
 //public accessors
 
-  public Option<String> userIdOption();
+  public Option<String> researcherIdOption();
   public Option<TopicState> stateOption();
   public Option<Object> skipOption();
   public Option<Object> limitOption();

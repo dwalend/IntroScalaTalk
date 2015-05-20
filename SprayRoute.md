@@ -1,7 +1,7 @@
 ##A Spray Route is a Function That Takes a RequestContext
 ###A RequestConext is an HttpRequest Plus Odd Bits
 ###Route Does Not Return Anything, But Can Send an HttpResponse to an Akka Actor
-###Routes are built from Directives
+###Routes Are Made From Directives
 ```Scala
 abstract class Directive[L <: shapeless.HList] { self =>
     def happly(f: L => Route): Route
