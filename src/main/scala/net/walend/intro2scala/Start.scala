@@ -15,8 +15,8 @@ object Start {
     TextLine("With Examples Using Slick and Spray", Style.Title),
     BlankLine,
     TextLine("David Walend", Style.SubTitle),
-    TextLine("Boston Scala Meetup, May 20th, 2015", Style.SubTitle),
-    LinkTextLine("Slides Online", "https://github.com/dwalend/IntroScalaTalk", Style.SubTitle)
+    TextLine("Boston Scala Meetup, May 20th, 2015", Style.TertiaryLine),
+    LinkTextLine("Slides Online (MarkDown)", "https://dwalend.github.io/IntroScalaTalk/Cover.md", Style.TertiaryLine)
   ))
 
   val Abstract = SimpleSlide("Abstract",Seq(TextLine(
@@ -42,7 +42,7 @@ object Start {
     TextLine("Scala",Style.Title),
     LinkTextLine("A Scalable Programming Language","http://www.scala-lang.org/what-is-scala.html",Style.HeadLine),
     TextLine("Scales in Scope",Style.HeadLine),
-    TextLine("Scripting, Web pages, Desktop, Servers, Distributed",Style.SupportLine),
+    TextLine("Scripting, Web pages, Desktop, Servers, Distributed - Both Homo- and Heterogeneous",Style.SupportLine),
     TextLine("Roots in Category Theory Make Code Expressive"),
     TextLine("Scales for Differences in Knowledge and Experience",Style.HeadLine),
     TextLine("Enables Different Coding Styles",Style.SupportLine),
@@ -52,29 +52,38 @@ object Start {
 
   val CodeStyle = SimpleSlide("CodStyle",Seq(
     TextLine("Scala Enables Different Coding Styles",Style.Title),
-    TextLine("Custom Control Flow"),
+    TextLine("Extremely Clear Code",Style.HeadLine),
+    TextLine("Use the Style That Best Matches the Task at Hand",Style.SupportLine),
+    TextLine("Styles Made Built From Language Primitives",Style.HeadLine),
+    TextLine("Not Language Changes",Style.SupportLine),
+    TextLine("Solid Platform for Domain-Specific Languages",Style.HeadLine)
+  ))
+
+  val CodeStyleFromLanguage = SimpleSlide("CodeStyleFromLanguage",Seq(
+    TextLine("Scala Enables Different Coding Styles",Style.Title),
+    TextLine("Strongly Typed - the Most Complete Type System in Use",Style.HeadLine),
+    TextLine("Custom Control Flow",Style.HeadLine),
     TextLine("First-class Functions and Higher-Order Functions",Style.SupportLine),
     CodeBlock("""  def configForTest[T](key:String,value:String)(block: => T):T = {
                 |    val originalValue = System.getProperty(key)
                 |    System.setProperty(key,value)
-                |    try{
-                |      block
+                |    try { block }
+                |    finally { System.setProperty(key,originalValue) }
+                |  }
+                |
+                |  def testAutoApprove() {
+                |    configForteset("shrine.steward.mode","AutoApprove"){
+                |      ... //test code
                 |    }
-                |    finally {
-                |      System.setProperty(key,originalValue)
-                |    }
-                |  }"""),
-    TextLine("Strongly Typed - the Most Complete Type System in Use"),
-    TextLine("Solid Platform for Domain-Specific Languages"),
-    TextLine("Style Support is Built From Language Primitives, Not Language Changes",Style.HeadLine),
-    TextLine("Extremely Clear Code",Style.HeadLine),
-    TextLine("Use the Style That Best Matches the Task at Hand",Style.SupportLine)
+                |  }
+                |
+                |  """.stripMargin)
   ))
 
   val FuncOption = SimpleSlide("FuncOption",Seq(
     TextLine("Functional Programming with Option[T]",Style.Title),
     TextLine("Handle Empty Fields With Container",Style.HeadLine),
-    TextLine("Replace null checks, Cure for Sir Tony Hoare's ",Style.SupportLine),
+    TextLine("Replace Nulls And Checks, Fix Sir Tony Hoare's ",Style.SupportLine),
     LinkTextLine(""""billion-dollar mistake ... the invention of the null reference in 1965"""","http://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions",Style.SupportLine),
     BlankLine,
     TextLine("Option[T] is an abstract class with two subclasses",Style.HeadLine),
@@ -86,13 +95,14 @@ object Start {
     CodeBlock("""
 val someString:Option[String] = Some("some string")
 val noString:Option[String] = None
+val suspectString:Option[String] = Option(null) // == None
               """)
   ))
 
   val FuncFold = SimpleSlide("FuncFold",Seq(
-    TextLine("Functional Programming with Option.fold()()",Style.HeadLine),
+    TextLine("Functional Programming with Option's fold()()",Style.HeadLine),
     BlankLine,
-    TextLine("Option's fold()() method takes two functions"),
+    TextLine("Option[T]'s fold()() method takes two functions"),
     TextLine("def fold[Out](ifEmpty: => Out)(f: (T) => Out): Out",Style.ScalaCode),
     TextLine("Some[T].fold()() evaluates the right function with the value as an argument",Style.SupportLine),
     TextLine("None[T].fold()() evaluates the left (no-argument) function",Style.SupportLine),
@@ -104,7 +114,7 @@ val noString:Option[String] = None
     LinkTextLine("Read more about fold()()","https://coderwall.com/p/4l73-a/scala-fold-foldleft-and-foldright",Style.SupportLine)
   ))
 
-  val slides = Seq(Cover,Abstract,Outline,ScalaWhat,CodeStyle,FuncOption,FuncFold)
+  val slides = Seq(Cover,Abstract,Outline,ScalaWhat,CodeStyle,CodeStyleFromLanguage,FuncOption,FuncFold)
 }
 
 //todo a slide about shrine and gage the room

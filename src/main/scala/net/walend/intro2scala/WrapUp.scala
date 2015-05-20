@@ -12,11 +12,12 @@ object WrapUp {
 
   val WrapUp = SimpleSlide("WrapUp",Seq(
     TextLine("Scala Leads Where We Are Going",Style.Title),
-    TextLine("Java Follows Scala",Style.HeadLine),
+    TextLine("Scala Can Adopt New Code Styles",Style.HeadLine),
+    TextLine("Java Follows Scala",Style.SupportLine),
     TextLine("JDK8 Streams, Lambdas, Optional",Style.SupportLine),
-    TextLine("Modern Hardware Provides More Cores",Style.HeadLine),
-    TextLine("Not a Faster Solver For the Halting Problem",Style.SupportLine),
-    TextLine("Functional Programming Can Get Back Your 'Free Lunch'",Style.HeadLine),
+    TextLine("Modern Hardware Provides More Cores, Spread Out, Different",Style.HeadLine),
+    TextLine("No Longer a Faster Solver For the Halting Problem",Style.SupportLine),
+    TextLine("Functional Programming Can Get Back Your 'Free Lunch'",Style.SupportLine),
     TextLine("Big Data Tools Are Written in Scala - Spark, Storm, Neo4J, Many Others",Style.SupportLine),
     TextLine("Scala.js Compiles Scala to JavaScript (also Tasty!)",Style.HeadLine),
     TextLine("Even Browser Code Could Be Fun",Style.SupportLine)

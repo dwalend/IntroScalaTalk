@@ -78,7 +78,7 @@ object Slick {
     TextLine("Slick Composible Lifted Query",Style.Title),
     CodeBlock("""  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = allTopicQuery
-                |    val researcherFilter = queryParameters.researcherIdOption.fold(allTopics)(userId => allTopics.filter(_.createdBy === userId))
+                |    val researcherFilter = queryParameters.researcherIdOption.fold(allTopics)(researcherId => allTopics.filter(_.createdBy === researcherId))
                 |    val stateFilter = queryParameters.stateOption.fold(researcherFilter)(state => researcherFilter.filter(_.state === state.name))
                 |    val minDateFilter = queryParameters.minDate.fold(stateFilter)(minDate => stateFilter.filter(_.changeDate >= minDate))
                 |    val maxDateFilter = queryParameters.maxDate.fold(minDateFilter)(maxDate => minDateFilter.filter(_.changeDate <= maxDate))
@@ -153,9 +153,7 @@ object Slick {
 
   val SlickPlainSql = SimpleSlide("SlickPlainSql",Seq(
     TextLine("Slick Plain SQL",Style.Title),
-    CodeBlock("""
-                |
-                |      val columnNamesToSelect = columnsToSelect.map(_.name)
+    CodeBlock("""      val columnNamesToSelect = columnsToSelect.map(_.name)
                 |
                 |      //Get distinct researcher ids
                 |      val distinctResearchersIdQuery = sql"select distinct(#$aniIdColumnName) from #$nodeTableName where #$roleColumnName = ${NodeType.RESEARCHER.abbreviation} or #$roleColumnName = ${NodeType.PHYSRES.abbreviation}".as[String]
@@ -176,9 +174,9 @@ object Slick {
 
   val Slick3 = SimpleSlide("Slick3",Seq(
     TextLine("Slick 3.0",Style.Title),
-    TextLine("Database I/O Actions Supports Paging",Style.HeadLine),
+    TextLine("Database I/O Actions Supports FP Cleanly",Style.HeadLine),
     TextLine("Publish to Akka Streams to get Reactive Backpressure",Style.SupportLine),
-    LinkTextLine("Hikari Connection Pool","http://brettwooldridge.github.io/HikariCP/",Style.HeadLine),
+    LinkTextLine("Hikari NIO Connection Pool","http://brettwooldridge.github.io/HikariCP/",Style.SupportLine),
     TextLine("Macro-Based Implementation of the Plain SQL API",Style.HeadLine),
     TextLine("Compile-Time Checking and Type Inference For SQL Statements",Style.SupportLine),
     TextLine("Attempted Backwards Compatibility",Style.SupportLine)

@@ -28,7 +28,7 @@ object Spray {
     TextLine("A Spray Route is a Function That Takes a RequestContext",Style.HeadLine),
     TextLine("A RequestConext is an HttpRequest Plus Odd Bits",Style.SupportLine),
     TextLine("Route Does Not Return Anything, But Can Send an HttpResponse to an Akka Actor",Style.SupportLine),
-    TextLine("Routes are built from Directives",Style.TertiaryLine),
+    TextLine("Routes Are Made From Directives",Style.TertiaryLine),
     CodeBlock("""abstract class Directive[L <: shapeless.HList] { self =>
                 |    def happly(f: L => Route): Route""".stripMargin),
     TextLine("A Shapeless HList is ...",Style.TertiaryLine),
@@ -70,7 +70,7 @@ object Spray {
 
   val SprayDirective = SimpleSlide("SprayDirective",Seq(
     TextLine("A Spray Directive"),
-    TextLine("QueryParameters Originally Used the parameters() Directive to Create New QueryParameters",Style.TertiaryLine),
+    TextLine("Tried the parameters() Directive to Create New QueryParameters",Style.TertiaryLine),
     CodeBlock("""    def getUserTopics(userId:UserId):Route = get {
                 |      parameters(('userName.?,'state.?,'skip.as[Int].?,'limit.as[Int].?,'sortBy.as[String].?,'sortDirection.as[String].?).as[QueryParameters]) {
                 |        queryParameters =>
@@ -84,7 +84,7 @@ object Spray {
     TextLine("TopicState is an Enumeration, Needs Error Checking",Style.TertiaryLine),
     TextLine("Didn't Want to Cut-Paste That Much Code",Style.TertiaryLine),
     CodeBlock("""  import shapeless.{:: => shapelessConcat}
-                |  case class matchQueryParameters(userId:Option[UserId] = None) extends Directive[QueryParameters shapelessConcat HNil] {
+                |  case class matchQueryParameters(researcherId:Option[UserId] = None) extends Directive[QueryParameters shapelessConcat HNil] {
                 |    import spray.routing.directives.ParameterDirectives._
                 |    import spray.routing.directives.RouteDirectives.complete
                 |    import spray.routing.directives.RespondWithDirectives.respondWithStatus
@@ -96,7 +96,7 @@ object Spray {
                 |        val stateTry = TopicState.stateForStringOption(stateStringOption)
                 |        stateTry match {
                 |          case Success(stateOption) => {
-                |              val qp = QueryParameters(userId,
+                |              val qp = QueryParameters(researcherId,
                 |                                        stateOption,
                 |                                        skipOption,
                 |                                        limitOption,
@@ -144,14 +144,14 @@ object Spray {
                 |    }
                 |  }
                 |""".stripMargin),
-    CodeBlock("""  def getUserTopics(userId:UserName):Route = get {
+    CodeBlock("""  def getUserTopics(researcherId:UserName):Route = get {
                 |    //lookup topics for this user in the db
-                |   matchQueryParameters(Some(userId)){queryParameters:QueryParameters =>
+                |   matchQueryParameters(Some(researcherId)){queryParameters:QueryParameters =>
                 |      val researchersTopics = StewardDatabase.db.selectTopicsForResearcher(queryParameters)
                 |      complete(researchersTopics)
                 |    }
                 |  }
-                |""")
+                |""".stripMargin)
   ))
 
   val slides = Seq(SprayIntro,SprayRoute,SprayRouteDsl,SprayDirective,SprayNoDirective)

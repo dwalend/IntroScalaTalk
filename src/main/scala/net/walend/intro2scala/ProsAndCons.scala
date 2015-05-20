@@ -30,7 +30,7 @@ object ProsAndCons {
     LinkTextLine("Fulfills Eight Items From Josh Bloch's _Effective Java_","http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html",Style.SupportLine),
     LinkTextLine("From One of Shrine's Microservices","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
     CodeBlock(
-      """case class QueryParameters(userIdOption:Option[UserId] = None,
+      """case class QueryParameters(researcherIdOption:Option[UserId] = None,
         |                            stateOption:Option[TopicState] =  None,
         |                            skipOption:Option[Int] =  None,
         |                            limitOption:Option[Int] = None,
@@ -39,7 +39,7 @@ object ProsAndCons {
         |                          )
         |
         |val everything = QueryParameters()
-        |val justDave = QueryParameters(userIdOption = Some("dave"))
+        |val justDave = QueryParameters(researcherIdOption = Some("dave"))
         |val justDaveByDate = justDave.copy(sortByOption = Some("date"))
         |
       """.stripMargin),
@@ -58,7 +58,7 @@ object ProsAndCons {
         |
         |//Immutable member variables
         |
-        |  private final Option<String> userIdOption;
+        |  private final Option<String> researcherIdOption;
         |  private final Option<TopicState> stateOption;
         |  private final Option<Object> skipOption;
         |  private final Option<Object> limitOption;
@@ -67,7 +67,7 @@ object ProsAndCons {
         |
         |//public accessors
         |
-        |  public Option<String> userIdOption();
+        |  public Option<String> researcherIdOption();
         |  public Option<TopicState> stateOption();
         |  public Option<Object> skipOption();
         |  public Option<Object> limitOption();
@@ -157,10 +157,10 @@ object ProsAndCons {
 
   val MorePros = SimpleSlide("MorePros",Seq(
     TextLine("Scala - More Pros", Style.Title),
-    TextLine("Good Match for Contemporary and Next Generation Computing Environments", Style.HeadLine),
+    TextLine("Fits Contemporary and Next Generation Computing Systems", Style.HeadLine),
     TextLine("Immutable FP Can Use All Cores With Safety and Comfort",Style.SupportLine),
     FragLine(Seq(
-      TextFragment("Distributed, Large Scale: "),
+      TextFragment("Distributed, Large Scale, Reliable: "),
       LinkFragment("Akka","http://akka.io"),TextFragment(","),
       LinkFragment("Spark","https://spark.apache.org"),TextFragment(","),
       LinkFragment("Storm","https://storm.apache.org")
@@ -176,7 +176,7 @@ object ProsAndCons {
     TextLine("Run in a Browser or via node.js Instead of in the JVM",Style.TertiaryLine),
     LinkTextLine("Project TASTY to Target New Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit"),
     TextLine("Sometimes Future-Proof",Style.SupportLine),
-    LinkTextLine("Spray to use Akka streams without changing existing Spray Routes","http://spray.io/msug/#/",Style.TertiaryLine),
+//    LinkTextLine("Spray to use Akka streams without changing existing Spray Routes","http://spray.io/msug/#/",Style.TertiaryLine),
     TextLine("Fun",Style.HeadLine)
   ))
 
