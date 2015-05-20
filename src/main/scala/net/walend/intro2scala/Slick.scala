@@ -1,6 +1,6 @@
 package net.walend.intro2scala
 
-import net.walend.present.{CodeSyntax, CodeBlock, TextLine, LinkTextLine, Style, SimpleSlide}
+import net.walend.present._
 
 /**
  * @author dwalend
@@ -13,9 +13,10 @@ object Slick {
     TextLine("A Database Library For Scala", Style.HeadLine),
     TextLine("Uses Scala's Common Currencies In Its API",Style.SupportLine),
     TextLine("Case Classes and Tuples",Style.SupportLine),
-    TextLine("Lifted API For Functional-Style Queries",Style.HeadLine),
+    LinkTextLine("Functional-Relational Mapping API Queries Look Like Scala","http://slick.typesafe.com/doc/3.0.0/introduction.html",Style.HeadLine),
     LinkTextLine("Compact, Clean Code","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
     LinkTextLine("Composible Queries","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
+    TextLine("Previously Session-Based and Called 'Lifted' in Slick 2.1",Style.SupportLine),
     TextLine("Plain SQL API Gives Full Control Over SQL",Style.HeadLine),
     TextLine("Isolates SQL's Complexity",Style.SupportLine)
   ))
@@ -108,14 +109,20 @@ object Slick {
                 |  }
                 |
                 |  def selectTopicsForSteward(queryParameters: QueryParameters):StewardsTopics = {
-                |    blocking {
-                |      database.withSession { implicit session: Session =>
-                |        createStewardsTopics(topicCountQuery(queryParameters).length.run,
-                |                              queryParameters.skipOption.getOrElse(0), //List starts at this record number
-                |                              topicSelectQuery(queryParameters).list)
-                |      }
+                |    withDatabaseSession { implicit session: Session =>
+                |      createStewardsTopics(topicCountQuery(queryParameters).length.run,
+                |                            queryParameters.skipOption.getOrElse(0), //List starts at this record number
+                |                            topicSelectQuery(queryParameters).list)
                 |    }
                 |  }
+                |
+                |  def withDatabaseSession[T](f: Session => T): T = {
+                |    blocking {
+                |      database.withSession(f)
+                |    }
+                |  }
+                |
+                |
                 |""".stripMargin),
     TextLine("Produces SQL that looks like this: "),
     CodeBlock("""select x2."id", x2."name", x2."description", x2."createdBy",
@@ -134,7 +141,7 @@ object Slick {
                 |  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = mostRecentTopicQuery
                 |...""".stripMargin),
-    TextLine("Produces SQL that looks like this: "),
+    TextLine("Now SQL that looks like this: "),
     CodeBlock("""select x2."id", x2."name", x2."description", x2."createdBy",
                 |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
                 |x2 where (not exists(select x3."createDate", x3."description", x3."state",

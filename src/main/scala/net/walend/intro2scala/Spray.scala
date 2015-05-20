@@ -147,9 +147,7 @@ object Spray {
     CodeBlock("""  def getUserTopics(userId:UserName):Route = get {
                 |    //lookup topics for this user in the db
                 |   matchQueryParameters(Some(userId)){queryParameters:QueryParameters =>
-                |      val researchersTopics = blocking {
-                |        StewardDatabase.db.selectTopicsForResearcher(queryParameters)
-                |      }
+                |      val researchersTopics = StewardDatabase.db.selectTopicsForResearcher(queryParameters)
                 |      complete(researchersTopics)
                 |    }
                 |  }
