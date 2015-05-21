@@ -72,7 +72,7 @@ object Start {
                 |  }
                 |
                 |  def testAutoApprove() {
-                |    configForteset("shrine.steward.mode","AutoApprove"){
+                |    configForTest("shrine.steward.mode","AutoApprove"){
                 |      ... //test code
                 |    }
                 |  }

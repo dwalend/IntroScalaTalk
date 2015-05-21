@@ -27,8 +27,6 @@ object ProsAndCons {
   val CaseClass = SimpleSlide("CaseClass",Seq(
     TextLine("Case Classes", Style.Title),
     TextLine("Case Classes Are Scala's Common Currency", Style.HeadLine),
-    LinkTextLine("Fulfills Eight Items From Josh Bloch's _Effective Java_","http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html",Style.SupportLine),
-    LinkTextLine("From One of Shrine's Microservices","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
     CodeBlock(
       """case class QueryParameters(researcherIdOption:Option[UserId] = None,
         |                            stateOption:Option[TopicState] =  None,
@@ -152,7 +150,9 @@ object ProsAndCons {
         |  private QueryParameters$();
         |}
         |
-      """.stripMargin,CodeSyntax.Java)
+      """.stripMargin,CodeSyntax.Java),
+    LinkTextLine("Fulfills Eight Items From Josh Bloch's _Effective Java_","http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html",Style.SupportLine)
+
   ))
 
   val MorePros = SimpleSlide("MorePros",Seq(

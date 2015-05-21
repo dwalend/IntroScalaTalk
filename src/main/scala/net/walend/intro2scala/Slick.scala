@@ -141,7 +141,7 @@ object Slick {
                 |  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = mostRecentTopicQuery
                 |...""".stripMargin),
-    TextLine("Now SQL that looks like this: "),
+    TextLine("Now SQL Looks Like This: "),
     CodeBlock("""select x2."id", x2."name", x2."description", x2."createdBy",
                 |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
                 |x2 where (not exists(select x3."createDate", x3."description", x3."state",
