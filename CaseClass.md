@@ -1,7 +1,5 @@
 #Case Classes
 ##Case Classes Are Scala's Common Currency
-###[Fulfills Eight Items From Josh Bloch's _Effective Java_](http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html)
-###[From One of Shrine's Microservices](https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup)
 ```Scala
 case class QueryParameters(researcherIdOption:Option[UserId] = None,
                             stateOption:Option[TopicState] =  None,
@@ -129,4 +127,5 @@ public final class QueryParameters$ extends runtime.AbstractFunction6<Option<Str
 
       
 ```
+###[Fulfills Eight Items From Josh Bloch's _Effective Java_](http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html)
 ###[Prev](Pros.md) [Next](MorePros.md)
