@@ -10,7 +10,7 @@ import net.walend.present.{BlankLine, LinkTextLine, Style, TextLine, SimpleSlide
  */
 object WrapUp {
 
-  val WrapUp = SimpleSlide("WrapUp",Seq(
+  val WrapUp = SimpleSlide("WrapUp",
     TextLine("Scala Leads Where We Are Going",Style.Title),
     TextLine("Scala Can Adopt New Code Styles",Style.HeadLine),
     TextLine("Java Follows Scala",Style.SupportLine),
@@ -22,16 +22,16 @@ object WrapUp {
     TextLine("Big Data Tools Are Written in Scala - Spark, Storm, Neo4J, Many Others",Style.SupportLine),
     TextLine("Scala.js Compiles Scala to JavaScript (also Tasty!)",Style.HeadLine),
     TextLine("Even Browser Code Could Be Fun",Style.SupportLine)
-  ))
+  )
 
-  val PartingQuote = SimpleSlide("PartingQuote",Seq(
+  val PartingQuote = SimpleSlide("PartingQuote",
     TextLine("Always favor readability ... ",Style.Quote),
     TextLine("take advantage of simple language features that afford great power but avoid the esoteric ones ...",Style.Quote),
     TextLine("complexity is the tax of sophistication - you must always ensure that its utility exceeds its cost.",Style.Quote),
     BlankLine,
     LinkTextLine("Twitter's _Effective Scala_","http://twitter.github.io/effectivescala/",Style.Plain)
 
-  ))
+  )
 
   val slides = Seq(WrapUp,PartingQuote)
 

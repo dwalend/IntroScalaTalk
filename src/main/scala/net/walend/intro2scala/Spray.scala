@@ -10,7 +10,7 @@ import net.walend.present.{TextLine, CodeBlock, LinkTextLine, SimpleSlide, Style
  */
 object Spray {
 
-  val SprayIntro = SimpleSlide("SprayIntro",Seq(
+  val SprayIntro = SimpleSlide("SprayIntro",
     LinkTextLine("Spray.io","http://spray.io/introduction/what-is-spray/",Style.Title),
     TextLine("A Library For Micro Web Services and Clients",Style.HeadLine),
     LinkTextLine("Asyncrhonous, Actor-Based, NIO-Based, Fast, Lightweight, Modular, and Testable","http://spray.io/introduction/what-is-spray/",Style.SupportLine),
@@ -22,9 +22,9 @@ object Spray {
     TextLine("Respond to HttpRequests in Micro Servers",Style.SupportLine),
     LinkTextLine("Next Version to be Renamed Akka-Http, Built on Akka Streams","http://typesafe.com/blog/typesafe-gets-sprayed",Style.HeadLine),
     LinkTextLine("Play2's Internals to be Rewritten to Use Akka-Http","http://typesafe.com/blog/typesafe-gets-sprayed",Style.SupportLine)
-  ))
+  )
 
-  val SprayRoute = SimpleSlide("SprayRoute",Seq(
+  val SprayRoute = SimpleSlide("SprayRoute",
     TextLine("A Spray Route is a Function That Takes a RequestContext",Style.HeadLine),
     TextLine("A RequestConext is an HttpRequest Plus Odd Bits",Style.SupportLine),
     TextLine("Route Does Not Return Anything, But Can Send an HttpResponse to an Akka Actor",Style.SupportLine),
@@ -33,9 +33,9 @@ object Spray {
                 |    def happly(f: L => Route): Route""".stripMargin),
     TextLine("A Shapeless HList is ...",Style.TertiaryLine),
     TextLine("... Try the Route DSL and See What Happens",Style.TertiaryLine)
-  ))
+  )
 
-  val SprayRouteDsl = SimpleSlide("SprayRouteDsl",Seq(
+  val SprayRouteDsl = SimpleSlide("SprayRouteDsl",
     TextLine("Spray Routing Provides a DSL",Style.HeadLine),
     TextLine("(Conceptually) Converts an HttpRequest Into an HttpResponse",Style.SupportLine),
     CodeBlock("https://datasteward.example.edu/researcher/topics?skip=10&limit=5&sortBy=name&sortDirection=ascending"),
@@ -66,9 +66,9 @@ object Spray {
                 |  }
                 |""".stripMargin)
 
-  ))
+  )
 
-  val SprayDirective = SimpleSlide("SprayDirective",Seq(
+  val SprayDirective = SimpleSlide("SprayDirective",
     TextLine("A Spray Directive"),
     TextLine("Tried the parameters() Directive to Create New QueryParameters",Style.TertiaryLine),
     CodeBlock("""    def getUserTopics(userId:UserId):Route = get {
@@ -116,9 +116,9 @@ object Spray {
                 |    }
                 |  }""".stripMargin)
 
-  ))
+  )
 
-  val SprayNoDirective = SimpleSlide("SprayNoDirective",Seq(
+  val SprayNoDirective = SimpleSlide("SprayNoDirective",
     TextLine("Better With a Higher Order Function"),
     CodeBlock("""  def matchQueryParameters(userName: Option[UserName])(parameterRoute:QueryParameters => Route): Route =  {
                 |
@@ -152,7 +152,7 @@ object Spray {
                 |    }
                 |  }
                 |""".stripMargin)
-  ))
+  )
 
   val slides = Seq(SprayIntro,SprayRoute,SprayRouteDsl,SprayDirective,SprayNoDirective)
 }

@@ -8,7 +8,7 @@ import net.walend.present._
  */
 object Slick {
 
-  val SlickIntro = SimpleSlide("Slick",Seq(
+  val SlickIntro = SimpleSlide("Slick",
     LinkTextLine("Slick","http://slick.typesafe.com/doc/3.0.0/introduction.html", Style.Title),
     TextLine("A Database Library For Scala", Style.HeadLine),
     TextLine("Uses Scala's Common Currencies In Its API",Style.SupportLine),
@@ -19,9 +19,9 @@ object Slick {
     TextLine("Previously Session-Based and Called 'Lifted' in Slick 2.1",Style.SupportLine),
     TextLine("Plain SQL API Gives Full Control Over SQL",Style.HeadLine),
     TextLine("Isolates SQL's Complexity",Style.SupportLine)
-  ))
+  )
 
-  val SlickLiftedTable = SimpleSlide("SlickLiftedTable",Seq(
+  val SlickLiftedTable = SimpleSlide("SlickLiftedTable",
     TextLine("Slick Lifted Table",Style.Title),
     CodeBlock("""case class TopicRecord(id:Option[TopicId] = None,
                 |                        name:String,
@@ -72,9 +72,9 @@ object Slick {
                 |  val allTopicQuery = TableQuery[TopicTable]
                 |""".stripMargin)
 
-  ))
+  )
 
-  val SlickLiftedQuery = SimpleSlide("SlickLiftedQuery",Seq(
+  val SlickLiftedQuery = SimpleSlide("SlickLiftedQuery",
     TextLine("Slick Composible Lifted Query",Style.Title),
     CodeBlock("""  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = allTopicQuery
@@ -129,9 +129,9 @@ object Slick {
                 |x2."createDate", x2."state", x2."changedBy", x2."changeDate" from "topics"
                 |x2 where x2."state" = 'Pending'
                 |""".stripMargin,CodeSyntax.Sql)
-  ))
+  )
 
-  val SlickComposibleQuery = SimpleSlide("SlickComposibleQuery",Seq(
+  val SlickComposibleQuery = SimpleSlide("SlickComposibleQuery",
     TextLine("New Requirement - Change History for Topics",Style.Title),
     TextLine("Composible Queries Work",Style.HeadLine),
     CodeBlock("""  val mostRecentTopicQuery: Query[TopicTable, TopicRecord, Seq] = for(
@@ -149,9 +149,9 @@ object Slick {
                 |"topics" x3 where (x3."id" = x2."id")
                 |and (x3."changeDate" > x2."changeDate"))) and (x2."state" = 'Pending')
                 |""".stripMargin,CodeSyntax.Sql)
-  ))
+  )
 
-  val SlickPlainSql = SimpleSlide("SlickPlainSql",Seq(
+  val SlickPlainSql = SimpleSlide("SlickPlainSql",
     TextLine("Slick Plain SQL",Style.Title),
     CodeBlock("""      val columnNamesToSelect = columnsToSelect.map(_.name)
                 |
@@ -170,9 +170,9 @@ object Slick {
                 |      //remove any null values from the map -- a bit of a hack
                 |      val researcherMapsWithoutNulls = researcherMaps.map(researcher => researcher.filter(x => x._2 != null))
                 |""".stripMargin)
-  ))
+  )
 
-  val Slick3 = SimpleSlide("Slick3",Seq(
+  val Slick3 = SimpleSlide("Slick3",
     TextLine("Slick 3.0",Style.Title),
     TextLine("Database I/O Actions Supports FP Cleanly",Style.HeadLine),
     TextLine("Publish to Akka Streams to get Reactive Backpressure",Style.SupportLine),
@@ -180,7 +180,7 @@ object Slick {
     TextLine("Macro-Based Implementation of the Plain SQL API",Style.HeadLine),
     TextLine("Compile-Time Checking and Type Inference For SQL Statements",Style.SupportLine),
     TextLine("Attempted Backwards Compatibility",Style.SupportLine)
-  ))
+  )
 
   val slides = Seq(SlickIntro,SlickLiftedTable,SlickLiftedQuery,SlickComposibleQuery,SlickPlainSql,Slick3)
 }

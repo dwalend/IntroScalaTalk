@@ -10,7 +10,7 @@ import net.walend.present.{CodeSyntax, CodeBlock, LinkTextLine, LinkFragment, Te
 object ProsAndCons {
 
 
-  val Pros = SimpleSlide("Pros",Seq(
+  val Pros = SimpleSlide("Pros",
     TextLine("Scala - Pros", Style.Title),
     TextLine("Thinking About a Problem Results in Readable, Concise Code", Style.HeadLine),
     FragLine(Seq(TextFragment("See"),LinkFragment("Dijkstra's Algorithm","http://en.wikipedia.org/wiki/Dijkstra's_algorithm#Pseudocode"),TextFragment("With"),LinkFragment("Semirings: Java vs Scala","http://dwalend.github.io/blog/2014/10/05/Semirings/"))),
@@ -22,9 +22,9 @@ object ProsAndCons {
     TextLine("Knowledge of Java Libraries Carries Forward",Style.SupportLine),
     TextLine("Out \"Javas\" Java in all but Community and Uptake"),
     FragLine(Seq(TextFragment("Compare"),LinkFragment("Scala's Intents","http://www.scala-lang.org/what-is-html"),TextFragment("to"),LinkFragment("Java's","http://www.oracle.com/technetwork/java/intro-141325.html#334")))
-  ))
+  )
 
-  val CaseClass = SimpleSlide("CaseClass",Seq(
+  val CaseClass = SimpleSlide("CaseClass",
     TextLine("Case Classes", Style.Title),
     TextLine("Case Classes Are Scala's Common Currency", Style.HeadLine),
     CodeBlock(
@@ -153,9 +153,9 @@ object ProsAndCons {
       """.stripMargin,CodeSyntax.Java),
     LinkTextLine("Fulfills Eight Items From Josh Bloch's _Effective Java_","http://grahamhackingscala.blogspot.com/2011/01/does-scala-equal-effective-java-bloch.html",Style.SupportLine)
 
-  ))
+  )
 
-  val MorePros = SimpleSlide("MorePros",Seq(
+  val MorePros = SimpleSlide("MorePros",
     TextLine("Scala - More Pros", Style.Title),
     TextLine("Fits Contemporary and Next Generation Computing Systems", Style.HeadLine),
     TextLine("Immutable FP Can Use All Cores With Safety and Comfort",Style.SupportLine),
@@ -174,13 +174,13 @@ object ProsAndCons {
       TextFragment("Compile Scala to Javascript via "),LinkFragment("scala.js","http://www.scala-js.org")),
       Style.HeadLine),
     TextLine("Run in a Browser or via node.js Instead of in the JVM",Style.TertiaryLine),
-    LinkTextLine("Project TASTY to Target New Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit"),
+    LinkTextLine("Project TASTY to Target New Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit",Style.SupportLine),
     TextLine("Sometimes Future-Proof",Style.SupportLine),
 //    LinkTextLine("Spray to use Akka streams without changing existing Spray Routes","http://spray.io/msug/#/",Style.TertiaryLine),
     TextLine("Fun",Style.HeadLine)
-  ))
+  )
 
-  val Cons = SimpleSlide("Cons",Seq(
+  val Cons = SimpleSlide("Cons",
     TextLine("Scala - Cons",Style.Title),
     TextLine("Intimidating, Tall Learning Curve",Style.HeadLine),
     TextLine("Danger - Contains Monads, Category Theory, Programmable Type System",Style.SupportLine),
@@ -189,9 +189,9 @@ object ProsAndCons {
     TextLine("Extremely Poor Theatre for Hourly Consulting",Style.SupportLine),
     TextLine("Does Not Help Figure Out What Problem to Solve",Style.HeadLine),
     TextLine("Using Scala Frees More Time for This Less Pleasant Task",Style.SupportLine)
-  ))
+  )
 
-  val MoreCons = SimpleSlide("MoreCons",Seq(
+  val MoreCons = SimpleSlide("MoreCons",
     TextLine("Scala - More Cons",Style.Title),
     TextLine("Small, Tight-Knit Community",Style.HeadLine),
     TextLine("Academic Instead of Pragmatic Biases",Style.SupportLine),
@@ -199,7 +199,7 @@ object ProsAndCons {
     TextLine("Kendall Square, South End, Harbor District, Longwood, Waltham",Style.TertiaryLine),
     TextLine("Rapidly Evolving Toolset and Libraries",Style.HeadLine),
     TextLine("Mild Disregard for Backwards Compatibility",Style.SupportLine)
-  ))
+  )
 
   val slides = Seq(Pros,CaseClass,MorePros,Cons,MoreCons)
 }

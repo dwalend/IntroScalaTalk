@@ -1,7 +1,7 @@
 package net.walend.intro2scala
 
 import net.walend.present.{CodeBlock, LinkTextLine, BlankLine, Style, TextLine, SimpleSlide}
-
+import net.walend.present.Shortcuts._
 
 /**
  * @author david 
@@ -10,35 +10,35 @@ import net.walend.present.{CodeBlock, LinkTextLine, BlankLine, Style, TextLine, 
 
 object Start {
 
-  val Cover = SimpleSlide ("Cover",Seq(
-    TextLine("An Introduction To Scala", Style.Title),
-    TextLine("With Examples Using Slick and Spray", Style.Title),
-    BlankLine,
-    TextLine("David Walend", Style.SubTitle),
-    TextLine("Boston Scala Meetup, May 20th, 2015", Style.TertiaryLine),
-    LinkTextLine("Slides Online (MarkDown)", "https://dwalend.github.io/IntroScalaTalk/Cover.md", Style.TertiaryLine)
-  ))
+  val Cover = SimpleSlide ("Cover",
+    t("An Introduction To Scala"),
+    t("With Examples Using Slick and Spray"),
+    blank,
+    st("David Walend"),
+    st("Boston Scala Meetup, May 20th, 2015"),
+    st("Slides Online (MarkDown)", "https://dwalend.github.io/IntroScalaTalk/Cover.md")
+  )
 
-  val Abstract = SimpleSlide("Abstract",Seq(TextLine(
+  val Abstract = SimpleSlide("Abstract",p(
     """The Boston Area Scala Enthusiasts MeetUp has had several requests for an introductory level talk on Scala. I recently put such a talk together for my coworkers at HMS that I'd like to share. I'll describe a bit about how Scala's founders intended it to be a scalable programming language, and cite examples that show some success. I will also share some anecdotes from my own career regarding pros and cons of Scala at work and in hobby code. Along the way I'll introduce case classes, Options, a little functional programming, Slick -- a database library, and Spray -- a web service library, all through example code pulled out of source control at my day job."""
-    .stripMargin,Style.SupportLine)))
-
-  val Outline = SimpleSlide("Outline",Seq(
-    TextLine("Scala", Style.HeadLine),
-    TextLine("A Scalable Language", Style.SupportLine),
-    BlankLine,
-    TextLine("Slick", Style.HeadLine),
-    TextLine("A minimalist Database layer", Style.SupportLine),
-    BlankLine,
-    TextLine("Spray", Style.HeadLine),
-    TextLine("A micro web-service framework", Style.SupportLine),
-    BlankLine,
-    TextLine("Examples from HMS Catalyst SHRINE Data Steward App", Style.SupportLine)
   ))
+
+  val Outline = SimpleSlide("Outline",
+    l1("Scala"),
+    l2("A Scalable Language"),
+    blank,
+    l1("Slick"),
+    l2("A minimalist Database layer"),
+    blank,
+    l1("Spray"),
+    l2("A micro web-service framework"),
+    blank,
+    l2("Examples from HMS Catalyst SHRINE Data Steward App")
+  )
 
   //todo shrine catalyst slide
 
-  val ScalaWhat = SimpleSlide("ScalaWhat",Seq(
+  val ScalaWhat = SimpleSlide("ScalaWhat",
     TextLine("Scala",Style.Title),
     LinkTextLine("A Scalable Programming Language","http://www.scala-lang.org/what-is-scala.html",Style.HeadLine),
     TextLine("Scales in Scope",Style.HeadLine),
@@ -48,18 +48,18 @@ object Start {
     TextLine("Enables Different Coding Styles",Style.SupportLine),
     TextLine("Strong Support for Procedural, OO, and Functional Styles",Style.SupportLine),
     TextLine("Creators Intend it to Scale Through Time",Style.HeadLine)
-  ))
+  )
 
-  val CodeStyle = SimpleSlide("CodStyle",Seq(
+  val CodeStyle = SimpleSlide("CodStyle",
     TextLine("Scala Enables Different Coding Styles",Style.Title),
     TextLine("Extremely Clear Code",Style.HeadLine),
     TextLine("Use the Style That Best Matches the Task at Hand",Style.SupportLine),
     TextLine("Styles Made Built From Language Primitives",Style.HeadLine),
     TextLine("Not Language Changes",Style.SupportLine),
     TextLine("Solid Platform for Domain-Specific Languages",Style.HeadLine)
-  ))
+  )
 
-  val CodeStyleFromLanguage = SimpleSlide("CodeStyleFromLanguage",Seq(
+  val CodeStyleFromLanguage = SimpleSlide("CodeStyleFromLanguage",
     TextLine("Scala Enables Different Coding Styles",Style.Title),
     TextLine("Strongly Typed - the Most Complete Type System in Use",Style.HeadLine),
     TextLine("Custom Control Flow",Style.HeadLine),
@@ -78,9 +78,9 @@ object Start {
                 |  }
                 |
                 |  """.stripMargin)
-  ))
+  )
 
-  val FuncOption = SimpleSlide("FuncOption",Seq(
+  val FuncOption = SimpleSlide("FuncOption",
     TextLine("Functional Programming with Option[T]",Style.Title),
     TextLine("Handle Empty Fields With Container",Style.HeadLine),
     TextLine("Replace Nulls And Checks, Fix Sir Tony Hoare's ",Style.SupportLine),
@@ -97,9 +97,9 @@ val someString:Option[String] = Some("some string")
 val noString:Option[String] = None
 val suspectString:Option[String] = Option(null) // == None
               """)
-  ))
+  )
 
-  val FuncFold = SimpleSlide("FuncFold",Seq(
+  val FuncFold = SimpleSlide("FuncFold",
     TextLine("Functional Programming with Option's fold()()",Style.HeadLine),
     BlankLine,
     TextLine("Option[T]'s fold()() method takes two functions"),
@@ -112,7 +112,7 @@ val suspectString:Option[String] = Option(null) // == None
          |val stringToPrint = yourOption.fold(".")(string => s"!$$string!")
          |""".stripMargin),
     LinkTextLine("Read more about fold()()","https://coderwall.com/p/4l73-a/scala-fold-foldleft-and-foldright",Style.SupportLine)
-  ))
+  )
 
   val slides = Seq(Cover,Abstract,Outline,ScalaWhat,CodeStyle,CodeStyleFromLanguage,FuncOption,FuncFold)
 }

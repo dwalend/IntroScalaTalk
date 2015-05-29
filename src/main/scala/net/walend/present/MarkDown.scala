@@ -50,8 +50,6 @@ object MarkDown {
 
   def render(item:Item):String = {
     item match {
-      case text: TextLine => render(text)
-      case linkedText: LinkTextLine => render(linkedText)
       case blankLine: Line if blankLine == BlankLine => render(blankLine)
       case codeBlock:CodeBlock => render(codeBlock)
       case fragLine:FragLine => render(fragLine)
@@ -59,18 +57,6 @@ object MarkDown {
   }
 
   def render(blankLine: Line):String = "\n"
-
-  def render(text:TextLine):String = {
-    val prefix = linePrefix(text.style)
-    val postfix = linePostfix.getOrElse(text.style,"\n")
-    s"$prefix${text.text}$postfix"
-  }
-
-  def render(text:LinkTextLine):String = {
-    val prefix = linePrefix(text.style)
-    val postfix = linePostfix.getOrElse(text.style,"\n")
-    s"$prefix[${text.text}](${text.url.toString})$postfix"
-  }
 
   def render(codeBlock: CodeBlock):String = {
     val prefix = s"```${codeBlock.syntax.name}\n"
