@@ -16,7 +16,6 @@ object Slick {
     LinkTextLine("Functional-Relational Mapping API Queries Look Like Scala","http://slick.typesafe.com/doc/3.0.0/introduction.html",Style.HeadLine),
     LinkTextLine("Compact, Clean Code","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
     LinkTextLine("Composible Queries","https://open.med.harvard.edu/vvc/viewvc.cgi/shrine/trunk/code/steward/src/main/scala/net/shrine/steward/db/StewardDatabase.scala?view=markup",Style.SupportLine),
-    TextLine("Previously Session-Based and Called 'Lifted' in Slick 2.1",Style.SupportLine),
     TextLine("Plain SQL API Gives Full Control Over SQL",Style.HeadLine),
     TextLine("Isolates SQL's Complexity",Style.SupportLine)
   )
@@ -109,19 +108,19 @@ object Slick {
                 |  }
                 |
                 |  def selectTopicsForSteward(queryParameters: QueryParameters):StewardsTopics = {
-                |    withDatabaseSession { implicit session: Session =>
+                |    dbRun {
                 |      createStewardsTopics(topicCountQuery(queryParameters).length.run,
                 |                            queryParameters.skipOption.getOrElse(0), //List starts at this record number
                 |                            topicSelectQuery(queryParameters).list)
                 |    }
                 |  }
                 |
-                |  def withDatabaseSession[T](f: Session => T): T = {
+                |  def dbRun[R](action: DBIOAction[R, NoStream, Nothing]):R = {
+                |    val future: Future[R] = database.run(action)
                 |    blocking {
-                |      database.withSession(f)
+                |      Await.result(future, 10 seconds)
                 |    }
                 |  }
-                |
                 |
                 |""".stripMargin),
     TextLine("Produces SQL that looks like this: "),
