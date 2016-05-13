@@ -21,7 +21,7 @@ object ProsAndCons {
     TextLine("Use Scala as a Better Java on the First Day",Style.SupportLine),
     TextLine("Knowledge of Java Libraries Carries Forward",Style.SupportLine),
     TextLine("Out \"Javas\" Java in all but Community and Uptake"),
-    FragLine(Seq(TextFragment("Compare"),LinkFragment("Scala's Intents","http://www.scala-lang.org/what-is-html"),TextFragment("to"),LinkFragment("Java's","http://www.oracle.com/technetwork/java/intro-141325.html#334")))
+    FragLine(Seq(TextFragment("Compare"),LinkFragment("Scala's Ambitions","http://www.scala-lang.org/what-is-html"),TextFragment("are a superset of"),LinkFragment("Java's","http://www.oracle.com/technetwork/java/intro-141325.html#334")))
   )
 
   val CaseClass = SimpleSlide("CaseClass",
@@ -33,8 +33,7 @@ object ProsAndCons {
         |                            skipOption:Option[Int] =  None,
         |                            limitOption:Option[Int] = None,
         |                            sortByOption:Option[String] = None,
-        |                            sortOrder:SortOrder = SortOrder.ascending
-        |                          )
+        |                            sortOrder:SortOrder = SortOrder.ascending)
         |
         |val everything = QueryParameters()
         |val justDave = QueryParameters(researcherIdOption = Some("dave"))
@@ -174,8 +173,8 @@ object ProsAndCons {
       TextFragment("Compile Scala to Javascript via "),LinkFragment("scala.js","http://www.scala-js.org")),
       Style.HeadLine),
     TextLine("Run in a Browser or via node.js Instead of in the JVM",Style.TertiaryLine),
-    LinkTextLine("Project TASTY to Target New Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit",Style.SupportLine),
-    TextLine("Sometimes Future-Proof",Style.SupportLine),
+    LinkTextLine("Project TASTY to Target Other Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit",Style.SupportLine),
+    TextLine("Sometimes Future-Proof",Style.HeadLine),
 //    LinkTextLine("Spray to use Akka streams without changing existing Spray Routes","http://spray.io/msug/#/",Style.TertiaryLine),
     TextLine("Fun",Style.HeadLine)
   )
@@ -196,7 +195,7 @@ object ProsAndCons {
     TextLine("Small, Tight-Knit Community",Style.HeadLine),
     TextLine("Academic Instead of Pragmatic Biases",Style.SupportLine),
     TextLine("Local (Boston) Uptake in Islands",Style.HeadLine),
-    TextLine("Kendall Square, South End, Harbor District, Longwood, Waltham",Style.TertiaryLine),
+    TextLine("Kendall Square, South End, Harbor District, Longwood, Waltham, Lexington",Style.TertiaryLine),
     TextLine("Rapidly Evolving Toolset and Libraries",Style.HeadLine),
     TextLine("Mild Disregard for Backwards Compatibility",Style.SupportLine)
   )

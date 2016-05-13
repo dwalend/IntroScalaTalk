@@ -75,7 +75,7 @@ object Slick {
   )
 
   val SlickLiftedQuery = SimpleSlide("SlickLiftedQuery",
-    TextLine("Slick Composible Lifted Query",Style.Title),
+    TextLine("Slick Composible Query",Style.Title),
     CodeBlock("""  private def topicCountQuery(queryParameters: QueryParameters):Query[TopicTable, TopicTable#TableElementType, Seq] = {
                 |    val allTopics:Query[TopicTable, TopicTable#TableElementType, Seq] = allTopicQuery
                 |    val researcherFilter = queryParameters.researcherIdOption.fold(allTopics)(researcherId => allTopics.filter(_.createdBy === researcherId))
