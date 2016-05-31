@@ -166,15 +166,15 @@ object ProsAndCons {
     ),Style.TertiaryLine),
     LinkTextLine("Spark sped up Hadoop by 100X","https://spark.apache.org",Style.TertiaryLine),
     FragLine(Seq(
-      LinkFragment("Vectorized CPU","https://github.com/scalanlp/breeze/wiki/Quickstart"),TextFragment(" and "),
-      LinkFragment("GPU","https://github.com/dlwh/puck"),TextFragment(" Libraries Being Developed")
-    ),Style.TertiaryLine),
-    FragLine(Seq(
       TextFragment("Compile Scala to Javascript via "),LinkFragment("scala.js","http://www.scala-js.org")),
       Style.HeadLine),
     TextLine("Run in a Browser or via node.js Instead of in the JVM",Style.TertiaryLine),
     LinkTextLine("Project TASTY to Target Other Platforms More Easily","https://docs.google.com/document/d/1h3KUMxsSSjyze05VecJGQ5H2yh7fNADtIf3chD3_wr0/edit",Style.HeadLine),
     LinkTextLine("Target hardware with Scala-Native","http://www.smartjava.org/content/getting-started-scala-native",Style.TertiaryLine),
+    FragLine(Seq(
+      LinkFragment("Vectorized CPU","https://github.com/scalanlp/breeze/wiki/Quickstart"),TextFragment(" and "),
+      LinkFragment("GPU","https://github.com/dlwh/puck"),TextFragment(" Libraries Being Developed")
+    ),Style.TertiaryLine),
     TextLine("Sometimes Future-Proof",Style.HeadLine),
 //    LinkTextLine("Spray to use Akka streams without changing existing Spray Routes","http://spray.io/msug/#/",Style.TertiaryLine),
     TextLine("Fun",Style.HeadLine)
